@@ -36,15 +36,16 @@ std::string StudentRoll::toString() const {
   return return_string;
 }
 
-void StudentRoll::clear(Node* head){
-  if (!head)
-    return;
-  else{
-    clear(head->next);
-    delete head->s;
-    delete head;
-  }
-}
+//delete clear function and use while loop to implement the destructor instead
+// void clear(StudentRoll::Node* head){
+//   if (!head)
+//     return;
+//   else{
+//     clear(head->next);
+//     delete head->s;
+//     delete head;
+//   }
+// }
 
 StudentRoll::StudentRoll(const StudentRoll &orig) {
   head = tail = NULL;
@@ -54,9 +55,22 @@ StudentRoll::StudentRoll(const StudentRoll &orig) {
   }
 }
 
+// StudentRoll::~StudentRoll() {
+//   if (head){
+//     clear(head);
+//   }
+// }
+
 StudentRoll::~StudentRoll() {
   if (head){
-    clear(head);
+    Node *currentNode = head;
+    Node *nextNode = nullptr;
+    while (currentNode){
+      nextNode = currentNode->next;
+      delete currentNode->s;
+      delete currentNode;
+      currentNode = nextNode;
+    }
   }
 }
 
@@ -75,7 +89,14 @@ StudentRoll & StudentRoll::operator =(const StudentRoll &right ) {
   // KEEP THE CODE BELOW THIS LINE
 
   if (head){
-    clear(head);
+    Node *currentNode = head;
+    Node *nextNode = nullptr;
+    while (currentNode){
+      nextNode = currentNode->next;
+      delete currentNode->s;
+      delete currentNode;
+      currentNode = nextNode;
+    }
   }
   head = tail = NULL;
 

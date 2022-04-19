@@ -22,8 +22,6 @@ class StudentRoll {
   };
   Node *head;
   Node *tail;
-
-  void clear(Node* head);
 };
 
 
